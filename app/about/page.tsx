@@ -8,11 +8,11 @@ export const metadata: Metadata = {
 };
 
 const milestones = [
-  { year: '2016', event: 'MDRA Wealth founded by Kushal Pal in Khanvel, Dadra & Nagar Haveli.' },
-  { year: '2018', event: 'Partnered with NJ Wealth, gaining access to India\'s largest MF distribution network.' },
-  { year: '2020', event: 'Crossed 100 active SIP clients; launched personalised retirement planning service.' },
-  { year: '2022', event: 'Expanded advisory to include ELSS, insurance guidance, and goal-based investing.' },
-  { year: '2024', event: 'Over 500 clients served; ₹10 Cr+ in assets guided. Launched Smart Planner tool.' },
+  { year: '2024', month: 'March', event: 'MDRA Wealth founded by Kushal Pal in Khanvel, Dadra & Nagar Haveli.' },
+  { year: '2025', month: 'October', event: 'Partnered with NJ Wealth, gaining access to India\'s largest MF distribution network.' },
+  { year: '2026', month: 'March', event: 'Crossed 100 active SIP clients; launched personalised retirement planning service.' },
+  { year: '2026', month: 'April', event: 'Expanded advisory to include ELSS, insurance guidance, and goal-based investing.' },
+  { year: '2026', month: 'May', event: 'Launched Smart Planner tool.' },
 ];
 
 const whyPoints = [
