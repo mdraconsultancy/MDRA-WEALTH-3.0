@@ -58,19 +58,19 @@ export default function Navbar() {
             : 'bg-transparent'
         )}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16 lg:h-20">
-            {/* Logo */}
-            <Link href="/" className="flex-shrink-0">
-              <Image
-                src={scrolled ? '/logo-light.png' : '/logo-dark.png'}
-                alt="MDRA Wealth Logo"
-                width={140}
-                height={40}
-                className="h-10 w-auto object-contain"
-                priority
-              />
-            </Link>
+       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <div className="flex items-center justify-between h-16 lg:h-20">
+    {/* Logo */}
+    <Link href="/" className="flex-shrink-0 -ml-2 sm:-ml-4">
+      <Image
+        src={scrolled ? '/logo-light.png' : '/logo-dark.png'}
+        alt="MDRA Wealth Logo"
+        width={80}
+        height={80}
+        className="h-14 w-14 lg:h-16 lg:w-16 object-contain"
+        priority
+      />
+    </Link>
 
             {/* Desktop Nav */}
             <nav className="hidden lg:flex items-center gap-1" aria-label="Main navigation">
