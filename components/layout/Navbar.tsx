@@ -61,7 +61,7 @@ export default function Navbar() {
        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
   <div className="flex items-center justify-start gap-8 md:gap-16 h-20 lg:h-20">
     {/* Logo */}
-    <Link href="/" className="flex-shrink-0 -ml-2 sm:-ml-4">
+    <Link href="/" className="flex-shrink-0 -ml-2 sm:-ml-4 -mr-8">
       <Image
         src={scrolled ? '/logo-light.png' : '/logo-dark.png'}
         alt="MDRA Wealth Logo"
