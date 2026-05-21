@@ -8,7 +8,7 @@ import BlogPreview from '@/components/sections/BlogPreview';
 import CTABanner from '@/components/sections/CTABanner';
 
 export const metadata: Metadata = {
-  title: 'MDRA Wealth | Mutual Fund Advisory & SIP Planning',
+  title: 'MDRA Wealth | Managed Discipline & Research Advisory',
   description:
     'Expert mutual fund advisory, SIP planning, and retirement planning in Dadra & Nagar Haveli. AMFI registered distributor ARN-353826. Start your free consultation today.',
 };
