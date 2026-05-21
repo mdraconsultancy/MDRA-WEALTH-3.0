@@ -72,15 +72,16 @@ export default function AboutPage() {
       </section>
 
       {/* Founder section */}
-      <section className="bg-white py-20 px-4">
-        <div className="max-w-5xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div>
-              <div className="w-48 h-48 rounded-full bg-gradient-to-br from-brand-navy to-brand-dark flex items-center justify-center mx-auto md:mx-0 mb-6 shadow-xl">
-                <span className="text-6xl font-bold text-brand-gold font-heading">KP</span>
-              </div>
-            </div>
-            <div>
+      <div className="relative w-48 h-48 rounded-full overflow-hidden mx-auto md:mx-0 mb-6 shadow-xl border-4 border-white bg-brand-navy">
+  <Image
+    src="/kushal-pal.jpg"
+    alt="Kushal Pal - AMFI Registered Mutual Fund Distributor"
+    fill
+    className="object-cover"
+    sizes="192px"
+    priority
+  />
+</div>
               <h2 className="font-heading text-3xl font-bold text-brand-navy mb-2">Kushal Pal</h2>
               <p className="text-brand-gold font-semibold mb-1">AMFI Registered Mutual Fund Distributor</p>
               <p className="text-sm text-gray-400 mb-4">Dadra &amp; Nagar Haveli</p>
