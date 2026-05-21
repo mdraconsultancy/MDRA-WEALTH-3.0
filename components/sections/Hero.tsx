@@ -106,9 +106,9 @@ export default function Hero() {
               className="grid grid-cols-3 gap-6"
             >
               {[
-                { icon: Users, value: 500, suffix: '+', label: 'Clients Served' },
-                { icon: TrendingUp, value: 10, suffix: ' Cr+', label: 'Assets Guided' },
-                { icon: Shield, value: 8, suffix: '+', label: 'Years Experience' },
+                { icon: Users, value: 100, suffix: '+', label: 'Clients Served' },
+                { icon: TrendingUp, value: 10, suffix: ' Lacs+', label: 'Assets Guided' },
+                { icon: Shield, value: 5, suffix: '+', label: 'Years Experience' },
               ].map(({ icon: Icon, value, suffix, label }) => (
                 <div key={label} className="text-center">
                   <Icon size={20} className="text-brand-gold mx-auto mb-2" aria-hidden="true" />
