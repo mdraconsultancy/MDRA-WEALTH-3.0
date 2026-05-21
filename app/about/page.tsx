@@ -91,7 +91,7 @@ export default function AboutPage() {
               </div>
 
               <p className="text-gray-600 leading-relaxed mb-4">
-                Kushal Pal is an AMFI-certified Mutual Fund Distributor with over 8 years of experience in
+                Kushal Pal is an AMFI-certified Mutual Fund Distributor with over 5 years of experience in
                 personal finance advisory. Based in Khanvel, Dadra &amp; Nagar Haveli, he has guided 100+ clients
                 across the region toward their financial goals through disciplined SIP investing and goal-based
                 wealth planning.
