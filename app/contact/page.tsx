@@ -58,7 +58,7 @@ export default function ContactPage() {
               <h3 className="font-heading font-bold text-brand-navy mb-1">Support Email</h3>
               <p className="text-xs text-gray-400 mb-3">For non-urgent queries only. Response time: 24–48 hrs.</p>
               <a
-                href="mailto:mdraconsultancy@outlook.com , mdraconsultancy@gmail.com"
+                href="mailto:mdraconsultancy@outlook.com,mdraconsultancy@gmail.com"
                 aria-label="Email MDRA Wealth"
                 className="flex items-center gap-2 text-brand-navy hover:text-brand-gold transition-colors"
               >
