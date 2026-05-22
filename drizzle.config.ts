@@ -1,14 +1,11 @@
 import { defineConfig } from 'drizzle-kit';
-import * as dotenv from 'dotenv';
-
-// Force Drizzle to read your Next.js environment file
-dotenv.config({ path: '.env.local' });
 
 export default defineConfig({
   schema: './lib/schema.ts',
   out: './drizzle',
-  dialect: 'postgresql', // Make sure this says postgresql
+  dialect: 'postgresql',
   dbCredentials: {
-    url: process.env.DATABASE_URL!,
+    // HARDCODED FOR TESTING ONLY - REMOVE AFTERWARD
+    url: "postgresql://neondb_owner:npg_axcR0z5bepqt@ep-tiny-brook-apbl1id6-pooler.c-7.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require",
   },
 });
