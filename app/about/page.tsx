@@ -1,12 +1,3 @@
-Ah, I see exactly what happened! That is a syntax error caused by a mistake I made in the previous snippet.
-
-I accidentally placed a comment `{/* Notice the addition of "object-top" below */}` *inside* the properties of the `<Image />` tag. Next.js (and React) strictly forbids putting comments inside a component's props like that, which caused the compiler to freak out and point to the top of your `return` statement.
-
-I have completely cleaned up the file, removed the invalid comment, and ensured the image is set to `450px`, `rounded-3xl` (box shape), and `object-top` so your full head is visible.
-
-Please copy and paste this **entire block** to replace everything in your `page.tsx` file:
-
-```tsx
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import { Shield, Eye, Heart, Target } from 'lucide-react';
@@ -168,5 +159,3 @@ export default function AboutPage() {
     </>
   );
 }
-
-```
