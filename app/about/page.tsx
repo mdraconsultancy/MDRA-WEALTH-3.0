@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Image from 'next/image'; // <-- Ensured this import is here!
 import { Shield, Eye, Heart, Target } from 'lucide-react';
 
 export const metadata: Metadata = {
@@ -76,15 +77,16 @@ export default function AboutPage() {
         <div className="max-w-5xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
-             <Image
-  src="/Kushal.jpg" 
-  alt="Founder of MDRA Wealth"
-  width={192}
-  height={192}
-  className="w-48 h-48 rounded-full object-cover mx-auto md:mx-0 mb-6 shadow-xl"
-  priority
-/>
-
+              <Image
+                src="/kushal-pal.jpg"
+                alt="Founder of MDRA Wealth"
+                width={192}
+                height={192}
+                className="w-48 h-48 rounded-full object-cover mx-auto md:mx-0 mb-6 shadow-xl"
+                priority
+              />
+            </div>
+            <div>
               <h2 className="font-heading text-3xl font-bold text-brand-navy mb-2">Kushal Pal</h2>
               <p className="text-brand-gold font-semibold mb-1">AMFI Registered Mutual Fund Distributor</p>
               <p className="text-sm text-gray-400 mb-4">Dadra &amp; Nagar Haveli</p>
@@ -139,12 +141,13 @@ export default function AboutPage() {
           <div className="relative">
             <div className="absolute left-6 top-0 bottom-0 w-0.5 bg-brand-gold/20" aria-hidden="true" />
             <div className="flex flex-col gap-8">
-              {milestones.map(({ year, event }) => (
-                <div key={year} className="flex gap-6 items-start">
+              {milestones.map(({ year, month, event }) => (
+                <div key={`${year}-${month}`} className="flex gap-6 items-start">
                   <div className="w-12 h-12 rounded-full bg-brand-navy flex items-center justify-center shrink-0 z-10">
                     <span className="text-brand-gold font-bold text-xs">{year}</span>
                   </div>
                   <div className="bg-brand-light rounded-xl p-4 flex-1">
+                    <p className="text-sm text-brand-navy font-semibold mb-1">{month} {year}</p>
                     <p className="text-sm text-gray-600 leading-relaxed">{event}</p>
                   </div>
                 </div>
