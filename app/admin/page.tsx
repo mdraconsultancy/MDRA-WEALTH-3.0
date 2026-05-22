@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useMemo, useCallback } from 'react';
 import Image from 'next/image';
-import { Search, Download, LogOut, RefreshCw } from 'lucide-react';
+import { Search, Download, LogOut, RefreshCw, Lock } from 'lucide-react';
 import { formatCurrency } from '@/lib/utils';
 
 interface Client {
@@ -21,6 +21,12 @@ interface Client {
 }
 
 export default function AdminPage() {
+  // Authentication states
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [passwordInput, setPasswordInput] = useState('');
+  const [loginError, setLoginError] = useState('');
+
+  // Data states
   const [clients, setClients] = useState<Client[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -34,12 +40,22 @@ export default function AdminPage() {
       const res = await fetch('/api/admin/clients', {
         headers: { 'x-admin-password': pw },
       });
+      
+      if (res.status === 401) {
+        setLoginError('Incorrect password. Please try again.');
+        setIsAuthenticated(false);
+        sessionStorage.removeItem('mdra-admin-pw');
+        setLoading(false);
+        return;
+      }
+
       if (!res.ok) {
         setError('Failed to load clients. Please refresh.');
         return;
       }
       const data = await res.json();
       setClients(data.clients ?? []);
+      setIsAuthenticated(true);
     } catch {
       setError('Network error. Please refresh.');
     } finally {
@@ -47,9 +63,28 @@ export default function AdminPage() {
     }
   }, []);
 
+  // Check for existing login on mount
   useEffect(() => {
-    fetchClients();
+    const storedPw = sessionStorage.getItem('mdra-admin-pw');
+    if (storedPw) {
+      fetchClients();
+    } else {
+      setLoading(false);
+    }
   }, [fetchClients]);
+
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoginError('');
+    sessionStorage.setItem('mdra-admin-pw', passwordInput);
+    fetchClients();
+  };
+
+  const handleLogout = () => {
+    sessionStorage.removeItem('mdra-admin-pw');
+    setIsAuthenticated(false);
+    setPasswordInput('');
+  };
 
   const filtered = useMemo(() => {
     if (!search.trim()) return clients;
@@ -58,12 +93,6 @@ export default function AdminPage() {
       (c) => c.name.toLowerCase().includes(q) || c.contactNumber.includes(q)
     );
   }, [clients, search]);
-
-  const handleLogout = () => {
-    sessionStorage.removeItem('mdra-admin-token');
-    sessionStorage.removeItem('mdra-admin-pw');
-    window.location.reload();
-  };
 
   const downloadCSV = () => {
     const headers = [
@@ -94,11 +123,46 @@ export default function AdminPage() {
     URL.revokeObjectURL(url);
   };
 
+  // --- LOGIN SCREEN ---
+  if (!isAuthenticated && !loading) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
+        <div className="max-w-md w-full bg-white rounded-3xl shadow-xl p-8 border border-gray-100 text-center">
+          <div className="w-16 h-16 bg-brand-navy/5 rounded-2xl flex items-center justify-center mx-auto mb-6">
+            <Lock size={32} className="text-brand-navy" />
+          </div>
+          <h1 className="font-heading text-2xl font-bold text-brand-navy mb-2">Admin Access</h1>
+          <p className="text-gray-500 mb-8 text-sm">Enter your administrative password to view client leads.</p>
+          
+          <form onSubmit={handleLogin} className="space-y-4">
+            <input
+              type="password"
+              value={passwordInput}
+              onChange={(e) => setPasswordInput(e.target.value)}
+              placeholder="Enter password..."
+              className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-brand-gold text-center tracking-widest"
+              autoFocus
+            />
+            {loginError && <p className="text-red-500 text-sm">{loginError}</p>}
+            <button
+              type="submit"
+              disabled={!passwordInput}
+              className="w-full py-3 rounded-xl bg-brand-navy text-white font-semibold hover:bg-brand-gold transition-colors disabled:opacity-50"
+            >
+              Unlock Dashboard
+            </button>
+          </form>
+        </div>
+      </div>
+    );
+  }
+
+  // --- DASHBOARD SCREEN ---
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Top bar */}
       <div className="bg-brand-navy px-6 py-4 flex items-center justify-between shadow-md">
-        <Image src="/logo-dark.png" alt="MDRA Wealth Admin" width={120} height={34} className="h-8 w-auto" />
+        <div className="text-white font-bold tracking-wider font-heading">MDRA WEALTH</div>
         <div className="flex items-center gap-3">
           <button
             onClick={fetchClients}
