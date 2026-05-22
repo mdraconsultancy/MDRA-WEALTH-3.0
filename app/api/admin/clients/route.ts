@@ -3,6 +3,10 @@ import { db } from '@/lib/db';
 import { clientSubmissions } from '@/lib/schema';
 import { desc } from 'drizzle-orm';
 
+// This forces Next.js to render this route dynamically per request, 
+// resolving the DYNAMIC_SERVER_USAGE build error caused by reading headers.
+export const dynamic = 'force-dynamic';
+
 export async function GET(request: NextRequest) {
   try {
     // 1. Security Check: Verify the password sent from your frontend
