@@ -72,17 +72,17 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Founder section */}
+    {/* Founder section */}
       <section className="bg-white py-20 px-4">
         <div className="max-w-5xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
               <Image
-                src="/Kushal.jpg"
+                src="/kushal-pal.jpg"
                 alt="Founder of MDRA Wealth"
-                width={384}
-                height={384}
-                className="w-96 h-96 rounded-full object-cover mx-auto md:mx-0 mb-6 shadow-xl"
+                width={450}
+                height={450}
+                className="w-[450px] h-[450px] rounded-3xl object-cover mx-auto md:mx-0 mb-6 shadow-2xl"
                 priority
               />
             </div>
