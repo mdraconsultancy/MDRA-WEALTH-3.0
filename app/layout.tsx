@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://mdrawealth.in'),
   title: {
     template: '%s | MDRA Wealth',
-    default: 'MDRA Wealth | Financial Advisory & Wealth Consultancy',
+    default: 'MDRA Wealth | Managed Discipline & Research Advisory',
   },
   description:
     'Expert mutual fund advisory, SIP planning, retirement planning and wealth management in Dadra & Nagar Haveli. AMFI registered ARN-353826.',
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     'ARN-353826',
   ],
   openGraph: {
-    title: 'MDRA Wealth | Financial Advisory & Wealth Consultancy',
+    title: 'MDRA Wealth | Managed Discipline & Research Advisory',
     description:
       'Expert mutual fund advisory, SIP planning, retirement planning and wealth management in Dadra & Nagar Haveli. AMFI registered ARN-353826.',
     url: 'https://mdrawealth.in',
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'MDRA Wealth | Financial Advisory & Wealth Consultancy',
+    title: 'MDRA Wealth | Managed Discipline & Research Advisory',
     description:
       'Expert mutual fund advisory, SIP planning, retirement planning and wealth management in Dadra & Nagar Haveli.',
     images: ['/og-image.png'],
