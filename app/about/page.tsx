@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import Image from 'next/image'; // <-- Ensured this import is here!
+import Image from 'next/image';
 import { Shield, Eye, Heart, Target } from 'lucide-react';
 
 export const metadata: Metadata = {
@@ -72,31 +72,21 @@ export default function AboutPage() {
         </div>
       </section>
 
-    {/* Founder section */}
-<section className="bg-white py-20 px-4">
-  <div className="max-w-5xl mx-auto">
-    <div className="grid md:grid-cols-2 gap-12 items-center">
-      <div>
-        <Image
-          src="/Kushal.jpg"
-          alt="Founder of MDRA Wealth"
-          // Updated: New, much larger px dimensions for Next.js (384px = 24rem)
-          width={384}
-          height={384}
-          // Updated: Use 'w-96 h-96' for Tailwind classes.
-          // 'rounded-full' and 'object-cover' still keep it a perfect circle, but now much larger.
-          className="w-96 h-96 rounded-full object-cover mx-auto md:mx-0 mb-6 shadow-xl"
-          priority
-        />
-      </div>
-      <div>
-        {/* Verbatim text continues here... */}
-        <h2 className="font-heading text-3xl font-bold text-brand-navy mb-2">Kushal Pal</h2>
-        {/* ... and all your existing paragraphs and AMFI button ... */}
-      </div>
-    </div>
-  </div>
-</section>
+      {/* Founder section */}
+      <section className="bg-white py-20 px-4">
+        <div className="max-w-5xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div>
+              <Image
+                src="/Kushal.jpg"
+                alt="Founder of MDRA Wealth"
+                width={384}
+                height={384}
+                className="w-96 h-96 rounded-full object-cover mx-auto md:mx-0 mb-6 shadow-xl"
+                priority
+              />
+            </div>
+            <div>
               <h2 className="font-heading text-3xl font-bold text-brand-navy mb-2">Kushal Pal</h2>
               <p className="text-brand-gold font-semibold mb-1">AMFI Registered Mutual Fund Distributor</p>
               <p className="text-sm text-gray-400 mb-4">Dadra &amp; Nagar Haveli</p>
