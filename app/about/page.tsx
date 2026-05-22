@@ -72,7 +72,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-    {/* Founder section */}
+  {/* Founder section */}
       <section className="bg-white py-20 px-4">
         <div className="max-w-5xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
@@ -82,7 +82,8 @@ export default function AboutPage() {
                 alt="Founder of MDRA Wealth"
                 width={450}
                 height={450}
-                className="w-[450px] h-[450px] rounded-3xl object-cover mx-auto md:mx-0 mb-6 shadow-2xl"
+                {/* Notice the addition of "object-top" below */}
+                className="w-[450px] h-[450px] rounded-3xl object-cover object-top mx-auto md:mx-0 mb-6 shadow-2xl"
                 priority
               />
             </div>
