@@ -46,7 +46,7 @@ export default function AboutPage() {
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="font-heading text-4xl sm:text-5xl font-bold text-white mb-4">About MDRA Wealth</h1>
           <p className="text-gray-300 text-lg">
-            Helping Indian families build wealth through disciplined, goal-based investing since 2016.
+            Helping Indian families build wealth through disciplined, goal-based investing since 2025.
           </p>
         </div>
       </div>
@@ -76,11 +76,14 @@ export default function AboutPage() {
         <div className="max-w-5xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
-              <div className="w-48 h-48 rounded-full bg-gradient-to-br from-brand-navy to-brand-dark flex items-center justify-center mx-auto md:mx-0 mb-6 shadow-xl">
-                <span className="text-6xl font-bold text-brand-gold font-heading">KP</span>
-              </div>
-            </div>
-            <div>
+             <Image
+  src="/Kushal.jpg" 
+  alt="Founder of MDRA Wealth"
+  width={192}
+  height={192}
+  className="w-48 h-48 rounded-full object-cover mx-auto md:mx-0 mb-6 shadow-xl"
+  priority
+/>
 
               <h2 className="font-heading text-3xl font-bold text-brand-navy mb-2">Kushal Pal</h2>
               <p className="text-brand-gold font-semibold mb-1">AMFI Registered Mutual Fund Distributor</p>
