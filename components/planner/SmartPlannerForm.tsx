@@ -23,7 +23,8 @@ const GOALS = [
   'Retirement', "Child's Education", 'Home Purchase',
   'Wealth Creation', 'Emergency Fund', 'Marriage', 'Other',
 ];
-const DURATIONS = [10, 12, 24, 36];
+// Updated DURATIONS to include 'Custom'
+const DURATIONS = [10, 12, 24, 36, 'Custom'];
 const FUND_CATEGORIES = [
   { value: 'Index', desc: 'Tracks Nifty/Sensex, low cost, ~11% avg returns' },
   { value: 'Large Cap', desc: 'Top 100 companies, stable, ~12% avg' },
@@ -50,6 +51,10 @@ function validate(step: number, data: FormData): string {
     const amt = parseInt(data.monthlyInvestment, 10);
     if (isNaN(amt) || amt < 500) return 'Minimum investment is ₹500/month.';
   }
+  // Added validation for the custom duration
+  if (step === 7 && (!data.investmentDuration || data.investmentDuration < 10)) {
+    return 'Please select a duration or enter a valid number of years.';
+  }
   return '';
 }
 
@@ -60,6 +65,11 @@ export default function SmartPlannerForm() {
   const [fieldError, setFieldError] = useState('');
   const [done, setDone] = useState(false);
   const [toast, setToast] = useState('');
+  
+  // Custom duration states
+  const [isCustomDuration, setIsCustomDuration] = useState(false);
+  const [customYears, setCustomYears] = useState('');
+
   const [result, setResult] = useState<{
     invested: number; returns: number; projected: number;
     data: { name: string; financialGoal: string; monthlyInvestment: number; fundCategory: string };
@@ -223,14 +233,53 @@ export default function SmartPlannerForm() {
 
           {step === 7 && (
             <StepWrap label={t('planner.step7.label')}>
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-2 gap-3 mb-5">
                 {DURATIONS.map((d) => (
-                  <button key={d} type="button" onClick={() => set('investmentDuration', d)}
-                    className={optionCls(form.investmentDuration === d)}>
-                    {d} months
+                  <button 
+                    key={d} 
+                    type="button" 
+                    onClick={() => {
+                      if (d === 'Custom') {
+                        setIsCustomDuration(true);
+                        // Save whatever is currently typed in years (convert to months) or 0
+                        set('investmentDuration', parseInt(customYears, 10) * 12 || 0);
+                      } else {
+                        setIsCustomDuration(false);
+                        set('investmentDuration', d as number);
+                      }
+                    }}
+                    className={optionCls(isCustomDuration ? d === 'Custom' : form.investmentDuration === d)}>
+                    {d === 'Custom' ? 'More...' : `${d} months`}
                   </button>
                 ))}
               </div>
+
+              {isCustomDuration && (
+                <div className="animate-in fade-in slide-in-from-top-2">
+                  <label className="block text-sm text-gray-600 mb-2">
+                    Enter duration in years
+                  </label>
+                  <div className="relative">
+                    <input
+                      autoFocus
+                      type="number"
+                      min="1"
+                      value={customYears}
+                      onChange={(e) => {
+                        setCustomYears(e.target.value);
+                        const yrs = parseInt(e.target.value, 10);
+                        // Convert years to months for the SIP calculation
+                        set('investmentDuration', isNaN(yrs) ? 0 : yrs * 12);
+                      }}
+                      placeholder="e.g. 5, 10, 15"
+                      className={inputCls}
+                    />
+                    <span className="absolute right-4 top-1/2 -translate-y-1/2 text-sm text-gray-400 font-semibold pointer-events-none">
+                      Years
+                    </span>
+                  </div>
+                </div>
+              )}
             </StepWrap>
           )}
 
