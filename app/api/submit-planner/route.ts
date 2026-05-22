@@ -1,51 +1,39 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { z } from 'zod';
-import { db } from '@/lib/db';
+import { NextResponse } from 'next/server';
+import { neon } from '@neondatabase/serverless';
+import { drizzle } from 'drizzle-orm/neon-http';
 import { clientSubmissions } from '@/lib/schema';
 
-const bodySchema = z.object({
-  name: z.string().min(2).max(100),
-  age: z.number().int().min(18).max(80),
-  contactNumber: z.string().regex(/^[6-9]\d{9}$/),
-  email: z.string().email().optional().or(z.literal('')),
-  financialGoal: z.string().min(1).max(100),
-  monthlyInvestment: z.number().int().min(500),
-  investmentDuration: z.number().int().min(1),
-  riskProfile: z.enum(['conservative', 'moderate', 'aggressive']),
-  fundCategory: z.string().min(1).max(30),
-  projectedValue: z.number().optional(),
-});
-
-export async function POST(request: NextRequest) {
+export async function POST(request: Request) {
   try {
+    // 1. Grab the data sent by your form
     const body = await request.json();
-    const parsed = bodySchema.safeParse(body);
+    
+    // 2. Connect to Neon
+    const sql = neon(process.env.DATABASE_URL!);
+    const db = drizzle(sql);
 
-    if (!parsed.success) {
-      return NextResponse.json(
-        { success: false, error: 'Invalid input', details: parsed.error.flatten() },
-        { status: 400 }
-      );
-    }
-
-    const data = parsed.data;
-
+    // 3. Insert the data into your client_submissions table
     await db.insert(clientSubmissions).values({
-      name: data.name,
-      age: data.age,
-      contactNumber: data.contactNumber,
-      email: data.email || null,
-      financialGoal: data.financialGoal,
-      monthlyInvestment: data.monthlyInvestment,
-      investmentDuration: data.investmentDuration,
-      riskProfile: data.riskProfile,
-      fundCategory: data.fundCategory,
-      projectedValue: data.projectedValue ?? null,
+      name: body.name,
+      age: body.age,
+      contactNumber: body.contactNumber,
+      // If email is empty from the form, send null so it doesn't break
+      email: body.email || null, 
+      financialGoal: body.financialGoal,
+      monthlyInvestment: body.monthlyInvestment,
+      investmentDuration: body.investmentDuration,
+      riskProfile: body.riskProfile,
+      fundCategory: body.fundCategory,
+      projectedValue: body.projectedValue,
     });
 
-    return NextResponse.json({ success: true });
-  } catch (err) {
-    console.error('Error saving planner submission:', err);
-    return NextResponse.json({ success: false, error: 'Internal server error' }, { status: 500 });
+    return NextResponse.json({ success: true, message: 'Lead saved successfully' });
+    
+  } catch (error) {
+    console.error('Database connection error:', error);
+    return NextResponse.json(
+      { success: false, error: 'Failed to save to database' }, 
+      { status: 500 }
+    );
   }
 }
