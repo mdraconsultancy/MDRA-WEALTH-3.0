@@ -18,7 +18,7 @@ const jsonLd = {
   '@type': ['LocalBusiness', 'FinancialService'],
   name: 'MDRA Wealth',
   url: 'https://mdrawealth.in',
-  telephone: '+91-7574812332',
+  telephone: '+91-9316505125',
   email: 'mdraconsultancy@outlook.com',
   address: {
     '@type': 'PostalAddress',
