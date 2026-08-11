@@ -47,7 +47,7 @@ export default function ContactPage() {
 
             <div className="flex items-center gap-3 text-brand-navy">
               <MessageCircle size={20} className="text-green-500 shrink-0" aria-hidden="true" />
-              <span className="font-semibold">+91 7574812332</span>
+              <span className="font-semibold">+91 9316505125</span>
             </div>
           </div>
 
